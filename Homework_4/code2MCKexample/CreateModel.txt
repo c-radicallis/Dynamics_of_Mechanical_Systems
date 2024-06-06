@@ -1,0 +1,30 @@
+clear all
+%
+SpringDamper(1).K=25000;
+SpringDamper(1).C=50;
+SpringDamper(1).L0=0.3;
+%
+SpringDamper(2).K=25000;
+SpringDamper(2).C=50;
+SpringDamper(2).L0=0.3;
+%
+SpringDamper(3).K=25000;
+SpringDamper(3).C=50
+SpringDamper(3).L0=0.3;
+%
+L=0.9;
+%
+Body(1).mass=500; Body(1).x=0.35;  Body(1).xd=0; 
+Body(2).mass=500; Body(2).x=0.55; Body(2).xd=0; 
+%
+tstart=0; tstep=0.01; tend=4.;
+solver='ode45'
+FuncEval='FirstDynamicSystem'
+%
+save('FirstDynamicModel.mat')
+%
+% End of the script
+
+
+
+

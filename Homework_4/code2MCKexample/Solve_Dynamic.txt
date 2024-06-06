@@ -1,0 +1,37 @@
+clear all
+close all
+clc
+%
+global SpringDamper Body tstart tstep tend solver FuncEval L
+%
+display('Need to run first the model to create mat file')
+[filename, Path]=uigetfile('*.mat','Select Model Data')
+%
+load([Path,filename])
+%
+[tspan,y_init]=PreProcessor();
+%
+
+%  
+%[t,y]=feval(solver,@FuncEval,tspan,y_init)
+[t,y]=ode45(@FirstDynamicSystem,[tstart,tend],y_init)
+%
+%Postprocessor(t,y);
+
+x1_position=y(:,1);
+x2_position=y(:,3);
+x1_velocity=y(:,2);
+x2_velocity=y(:,4);
+%
+figure(1)
+plot(t,x1_position,'.-',t,x2_position); hold on;
+grid on
+legend('x1 position','x2 position');
+xlabel('t'); ylabel('x_i (t)')
+
+figure(2)
+plot(t,x1_velocity,'.-',t,x2_velocity); hold on;
+grid on
+legend('v1 velocity','v2 velocity');
+xlabel('t'); ylabel('v_i (t)')
+
